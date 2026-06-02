@@ -350,9 +350,17 @@ function TasksScreen() {
                         {todo.description && (
                           <p className="text-sm text-charcoal font-courier">{todo.description}</p>
                         )}
-                        <div className="flex items-center gap-3 text-xs text-slate-gray font-courier">
-                          {todo.dueDate && <span>Vence: {formatDate(todo.dueDate)}</span>}
-                          <span>Prioridad: {PRIORITY_LABELS[todo.priority || 'MEDIUM']}</span>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3 text-xs text-slate-gray font-courier">
+                            {todo.dueDate && <span>Vence: {formatDate(todo.dueDate)}</span>}
+                            <span>Prioridad: {PRIORITY_LABELS[todo.priority || 'MEDIUM']}</span>
+                          </div>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setDeleteConfirm({ type: 'task', id: todo.uuid, label: todo.title }); }}
+                            className="flex items-center gap-1 text-xs font-semibold text-coral-pink cursor-pointer bg-transparent border-none hover:opacity-80"
+                          >
+                            <PngIcon name="close" size={14} /> ELIMINAR
+                          </button>
                         </div>
                       </div>
                     )}
