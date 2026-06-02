@@ -52,10 +52,8 @@ NEXT_PUBLIC_API_URL=https://tu-backend.com
 
 ## Usuarios de Prueba
 
-| Email             | Contrasena   |
-| ----------------- | ------------ |
-| ana333@gmail.com  | Contr@53n4.  |
-
+Email: ana333@gmail.com
+Contraseña: Contr@53n4
 ---
 
 ## Comandos
