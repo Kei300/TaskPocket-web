@@ -2,7 +2,7 @@ import type { Comment, CreateCommentPayload } from '@/src/types/Comment';
 import { authApi } from '../api';
 
 export async function fetchComments(listId: string): Promise<Comment[]> {
-  const { data } = await authApi.get<Comment[]>('/comment', { params: { listId } });
+  const { data } = await authApi.get<Comment[]>('/comment', { params: { id: listId } });
   return data;
 }
 
