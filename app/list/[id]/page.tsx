@@ -4,14 +4,14 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { AuthGuard } from '@/src/components/AuthGuard';
-import { AppHeader, RetroButton, RetroModal, TaskRow } from '@/src/components/common';
+import { AppHeader, RetroButton, TaskRow } from '@/src/components/common';
 import { NavBar, MobileNav } from '@/src/components/NavBar';
 import { Mascot } from '@/src/components/Mascot';
 import { PixelIcon } from '@/src/components/PixelIcon';
 import { PngIcon } from '@/src/components/PngIcon';
 import { fetchComments, createComment } from '@/src/services/comment/commentService';
 import { fetchLists } from '@/src/services/todo/listService';
-import { fetchTodosByList, updateTodo, deleteTodo } from '@/src/services/todo/todoService';
+import { fetchTodosByList, updateTodo } from '@/src/services/todo/todoService';
 import type { Todo, UpdateTodoPayload } from '@/src/types/Todo';
 import type { Comment } from '@/src/types/Comment';
 
@@ -67,17 +67,6 @@ function ListDetailScreen() {
       queryClient.invalidateQueries({ queryKey: ['todos', 'list', uuid] });
       queryClient.invalidateQueries({ queryKey: ['todos', 'full'] });
       queryClient.invalidateQueries({ queryKey: ['lists'] });
-    },
-  });
-
-  const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
-
-  const deleteTaskMut = useMutation({
-    mutationFn: (id: string) => deleteTodo(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos', 'list', uuid] });
-      queryClient.invalidateQueries({ queryKey: ['todos', 'full'] });
-      setDeleteConfirm(null);
     },
   });
 
@@ -163,24 +152,14 @@ function ListDetailScreen() {
               </div>
               <div className="flex flex-col gap-2.5">
                 {pendingTodos.map((todo: Todo) => (
-                  <div key={todo.uuid} className="flex items-center gap-2">
-                    <div className="flex-1">
-                      <TaskRow
-                        title={todo.title}
-                        description={todo.description}
-                        isCompleted={todo.completed}
-                        dueDate={todo.dueDate}
-                        onToggleComplete={() => handleToggle(todo)}
-                      />
-                    </div>
-                    <button
-                      onClick={() => setDeleteConfirm(todo.uuid)}
-                      className="w-8 h-8 flex items-center justify-center rounded-[4px] text-slate-gray hover:text-coral-pink hover:bg-coral-pink/10 cursor-pointer bg-transparent border-none flex-shrink-0"
-                      aria-label="Eliminar tarea"
-                    >
-                      <PngIcon name="close" size={14} />
-                    </button>
-                  </div>
+                  <TaskRow
+                    key={todo.uuid}
+                    title={todo.title}
+                    description={todo.description}
+                    isCompleted={todo.completed}
+                    dueDate={todo.dueDate}
+                    onToggleComplete={() => handleToggle(todo)}
+                  />
                 ))}
               </div>
             </div>
@@ -204,24 +183,14 @@ function ListDetailScreen() {
               </div>
               <div className="flex flex-col gap-2.5">
                 {completedTodos.map((todo: Todo) => (
-                  <div key={todo.uuid} className="flex items-center gap-2">
-                    <div className="flex-1">
-                      <TaskRow
-                        title={todo.title}
-                        description={todo.description}
-                        isCompleted={todo.completed}
-                        dueDate={todo.dueDate}
-                        onToggleComplete={() => handleToggle(todo)}
-                      />
-                    </div>
-                    <button
-                      onClick={() => setDeleteConfirm(todo.uuid)}
-                      className="w-8 h-8 flex items-center justify-center rounded-[4px] text-slate-gray hover:text-coral-pink hover:bg-coral-pink/10 cursor-pointer bg-transparent border-none flex-shrink-0"
-                      aria-label="Eliminar tarea"
-                    >
-                      <PngIcon name="close" size={14} />
-                    </button>
-                  </div>
+                  <TaskRow
+                    key={todo.uuid}
+                    title={todo.title}
+                    description={todo.description}
+                    isCompleted={todo.completed}
+                    dueDate={todo.dueDate}
+                    onToggleComplete={() => handleToggle(todo)}
+                  />
                 ))}
               </div>
             </div>
@@ -299,18 +268,6 @@ function ListDetailScreen() {
 
       <NavBar />
       <MobileNav />
-
-      {deleteConfirm && (
-        <RetroModal
-          open={true}
-          title="Eliminar tarea"
-          variant="error"
-          message="¿Estas seguro de eliminar esta tarea?"
-          buttonText="ELIMINAR"
-          onClose={() => setDeleteConfirm(null)}
-          onAction={() => deleteTaskMut.mutate(deleteConfirm)}
-        />
-      )}
     </main>
   );
 }
