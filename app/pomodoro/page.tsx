@@ -93,7 +93,6 @@ function PomodoroScreen() {
         <div className="w-full max-w-5xl p-6 pb-24">
           <AppHeader subtitle="Pomodoro" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center min-h-[calc(100vh-5rem)]">
-          {/* LEFT: Timer */}
           <div className="flex flex-col items-center gap-6">
 
             <BentoCard className="w-full border" variant={mode === 'focus' ? 'alert' : 'default'}>
@@ -156,7 +155,6 @@ function PomodoroScreen() {
             </BentoCard>
           </div>
 
-          {/* RIGHT: Mascot + Settings */}
           <div className="flex flex-col items-center gap-6">
             <Mascot state={isActive ? (mode === 'focus' ? 'focus' : 'success') : 'idle'} size={128} />
             <BentoCard>

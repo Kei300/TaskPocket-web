@@ -63,7 +63,6 @@ function RegisterScreen() {
 
   return (
     <main className="flex-1 flex min-h-screen bg-ice-white">
-      {/* Panel izquierdo: branding */}
       <div className="hidden md:flex w-1/2 bg-gradient-to-br from-electric-blue/5 to-deep-purple/5 items-center justify-center p-12">
         <div className="flex flex-col items-center gap-6 text-center max-w-md">
           <Mascot state="idle" size={160} />
@@ -79,7 +78,6 @@ function RegisterScreen() {
         </div>
       </div>
 
-      {/* Panel derecho: formulario */}
       <div className="flex-1 md:w-1/2 flex items-center justify-center p-6">
         <BentoCard className="w-full max-w-sm flex flex-col gap-6 p-8">
           <div className="flex flex-col items-center gap-2 md:hidden">

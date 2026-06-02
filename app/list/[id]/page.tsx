@@ -106,9 +106,7 @@ function ListDetailScreen() {
         <div className="w-full max-w-5xl p-6 pb-24">
           <AppHeader subtitle="Lista" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Columna izquierda: 2/3 — Lista + tareas */}
           <div className="md:col-span-2 flex flex-col gap-4">
-          {/* Header */}
           <div className="rounded-[10px] bg-pure-white border border-light-border p-4">
             <div className="flex items-start justify-between">
               <div className="flex-1">
@@ -206,7 +204,6 @@ function ListDetailScreen() {
           )}
           </div>
 
-          {/* Columna derecha: 1/3 — Comentarios */}
           <div className="md:col-span-1 flex flex-col gap-3">
           <div className="flex items-center gap-2.5">
             <span className="w-1.5 h-6 bg-deep-purple rounded-full" />

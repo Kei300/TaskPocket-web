@@ -44,12 +44,10 @@ function TasksScreen() {
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
   const [errorModal, setErrorModal] = useState({ visible: false, message: '' });
 
-  // List modals
   const [listModal, setListModal] = useState<{ open: boolean; edit: ListModel | null }>({ open: false, edit: null });
   const [listTitle, setListTitle] = useState('');
   const [listDesc, setListDesc] = useState('');
 
-  // Category modals
   const [catModal, setCatModal] = useState<{ open: boolean; edit: Category | null }>({ open: false, edit: null });
   const [catName, setCatName] = useState('');
   const [catColor, setCatColor] = useState('#3D5CFF');
@@ -109,7 +107,6 @@ function TasksScreen() {
     },
   });
 
-  // List CRUD mutations
   const saveListMut = useMutation({
     mutationFn: () => {
       if (listModal.edit) {
@@ -140,7 +137,6 @@ function TasksScreen() {
     },
   });
 
-  // Category CRUD mutations
   const saveCatMut = useMutation({
     mutationFn: () => {
       if (catModal.edit) {
@@ -196,7 +192,6 @@ function TasksScreen() {
         <div className="w-full max-w-5xl p-6 pb-24">
           <AppHeader subtitle="Tareas" />
 
-          {/* HEADER */}
           <div className="flex items-center justify-between mt-3 mb-4">
             <p className="text-sm text-slate-gray font-courier">
               {filtered.length} de {todos.length} tarea{filtered.length !== 1 ? 's' : ''}
@@ -226,7 +221,6 @@ function TasksScreen() {
             ))}
           </div>
 
-          {/* LISTS SECTION */}
           <section className="mb-4">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-bold text-electric-blue tracking-wide">LISTAS</span>
@@ -266,7 +260,6 @@ function TasksScreen() {
             </div>
           </section>
 
-          {/* CATEGORIES SECTION */}
           <section className="mb-4">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-bold text-electric-blue tracking-wide">CATEGORÍAS</span>
@@ -305,7 +298,6 @@ function TasksScreen() {
             </div>
           </section>
 
-          {/* TASKS LIST */}
           {filtered.length > 0 ? (
             <div className="flex flex-col gap-2">
               {filtered.map((todo: Todo) => {
@@ -385,11 +377,9 @@ function TasksScreen() {
         </div>
       </div>
 
-      {/* Modals */}
       <CreateTaskModal open={createOpen} onClose={() => setCreateOpen(false)} />
       <EditTaskModal key={selectedTask?.uuid ?? 'none'} open={editOpen} task={selectedTask} onClose={() => setEditOpen(false)} />
 
-      {/* List Create/Edit Modal */}
       <RetroModal open={listModal.open} title={listModal.edit ? 'Editar Lista' : 'Nueva Lista'} onClose={() => setListModal({ open: false, edit: null })}>
         <div className="flex flex-col gap-4">
           <PixelInput label="Nombre" value={listTitle} onChange={setListTitle} placeholder="Nombre de la lista" />
@@ -402,7 +392,6 @@ function TasksScreen() {
         </div>
       </RetroModal>
 
-      {/* Category Create/Edit Modal */}
       <RetroModal open={catModal.open} title={catModal.edit ? 'Editar Categoría' : 'Nueva Categoría'} onClose={() => setCatModal({ open: false, edit: null })}>
         <div className="flex flex-col gap-4">
           <PixelInput label="Nombre" value={catName} onChange={setCatName} placeholder="Nombre de la categoría" />
@@ -430,7 +419,6 @@ function TasksScreen() {
         </div>
       </RetroModal>
 
-      {/* Confirm Delete */}
       {deleteConfirm && (
         <RetroModal
           open={true}
@@ -448,7 +436,6 @@ function TasksScreen() {
         />
       )}
 
-      {/* Error Modal */}
       <RetroModal
         open={errorModal.visible}
         title="Error"

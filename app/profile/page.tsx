@@ -145,7 +145,6 @@ function ProfileScreen() {
         <div className="w-full max-w-5xl p-4 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14">
 
-        {/* LEFT: Profile + Ranks */}
         <div className="flex flex-col gap-5">
           <div className="flex items-center gap-4">
             <Mascot state="idle" size={64} />
@@ -249,7 +248,6 @@ function ProfileScreen() {
           </div>
         </div>
 
-        {/* RIGHT: About panel */}
         <div className="flex flex-col gap-5">
           <BentoCard>
             <AboutPanel />

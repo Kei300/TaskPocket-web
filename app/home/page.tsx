@@ -123,7 +123,6 @@ function HomeScreen() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
 
-            {/* LEFT COL: Overdue + Due Today */}
             <div className="flex flex-col gap-4">
               {hasOverdue && (
                 <div>
@@ -179,7 +178,6 @@ function HomeScreen() {
               )}
             </div>
 
-            {/* RIGHT COL: Lists */}
             <div className="flex flex-col gap-4">
               <SectionHeader title="Mis Listas" />
 
